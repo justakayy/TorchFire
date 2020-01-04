@@ -1,0 +1,6 @@
+name: TorchFire
+version: 1.0-SNAPSHOT
+main: me.aaronlyy.torchfire.main.Main
+api-version: 1.13
+authors: [aaronlyy]
+description: This plugin sets burnable blocks on fire if they are placed above a torch
