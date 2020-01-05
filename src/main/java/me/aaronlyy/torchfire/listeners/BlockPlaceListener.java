@@ -5,12 +5,15 @@
 
 package me.aaronlyy.torchfire.listeners;
 
+import me.aaronlyy.torchfire.main.Main;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class BlockPlaceListener implements Listener {
 
@@ -28,7 +31,12 @@ public class BlockPlaceListener implements Listener {
             Block blockAbove = blockPlaced.getRelative(BlockFace.UP);
             if (blockAbove.getType().isFlammable() || blockAbove.getType().isBurnable()) {
                 // set block on fire
-                setOnFire(blockAbove);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        setOnFire(blockAbove);
+                    }
+                }.runTaskLater(Main.getPlugin(), 3*20);
             }
         }
         else if (blockPlaced.getType().isBurnable() || blockPlaced.getType().isFlammable()){
@@ -40,15 +48,14 @@ public class BlockPlaceListener implements Listener {
             Block blockBelow = blockPlaced.getRelative(BlockFace.DOWN);
             if (blockBelow.getType() == Material.TORCH || blockBelow.getType() == Material.WALL_TORCH){
                 setOnFire(blockPlaced);
-
-                // set block on fire
-                setOnFire(blockPlaced);
             }
         }
     }
 
     private void setOnFire(Block block){
         // set block on fire if material above/north/west/east/south is air
+
+        block.getWorld().spawnParticle(Particle.LAVA, block.getLocation(), 10);
 
         // FACE UP
         if (block.getRelative(BlockFace.UP).getType() == Material.AIR){
