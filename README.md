@@ -1,4 +1,4 @@
-# Torch Fire README
+# TorchFire README
 Torch Fire is a very simple Spigot Plugin for Minecraft 1.15.1
 ## Functionality
 * **If a Torch is placed below a Block that is burnable/flammable (eg. wood), the Block will be set on Fire.**
