@@ -31,7 +31,10 @@ public class TorchPlaceListener implements Listener {
             Block blockAbove = blockAboveLocation.getBlock();
 
             if (blockAbove.getType().isFlammable() || blockAbove.getType().isBurnable()){
-                blockAbove.getRelative(BlockFace.UP).setType(Material.FIRE);
+                if (blockAbove.getRelative(BlockFace.UP).getType() == Material.AIR){
+                    // TODO: add delay
+                    blockAbove.getRelative(BlockFace.UP).setType(Material.FIRE);
+                }
             }
         }
     }
